@@ -1,0 +1,38 @@
+
+
+.bottom{
+    width: 100vw;
+    height:90vh;
+    display: flex;
+}
+
+.left{
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right{
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.homepage_logo{
+    width: 60%;
+    height:60%;
+}
+
+.h2_txt{
+    color:#1E1E1E;
+}
+
+.intro_txt{
+    color: #1E1E1E;
+}

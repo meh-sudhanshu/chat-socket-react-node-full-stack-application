@@ -1,0 +1,66 @@
+
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 70px;
+}
+
+.signup_form{
+    width: 45vw;
+    height: 75vh;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.info_ctn{
+    width: 100vw;
+    height: 25vh;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.rights_txt{
+    color: #1e1e1e;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.rights_txt span{
+    color: #Fc774d;
+}
+
+.ip{
+    width: 50%;
+    padding: 10px;
+}
+
+.submit_btn{
+    width: 50%;
+    padding: 10px;
+    background-color: #Fc774d;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.submit_btn:hover{
+    background-color: transparent;
+    border: 1px solid #Fc774d;
+    color: #Fc774d;
+}
+
+.warning{
+    font-size: 13px;
+    color: #FF6666;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-top: -15px;
+}
