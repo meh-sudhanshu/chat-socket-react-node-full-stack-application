@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
+
+import { useJwt } from "react-jwt";
+
+
 import axios from 'axios'
 
 import classes from './signup.module.css'
+import {passwordWarning,nameWarning} from '../../constants/inputInfos'
+import { signUpApi } from "../../constants/userApis";
 
 const SignUp = ()=>{
+    let navigate = useNavigate()
 
     const [name,setName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [confPassword,setConfPassword] = useState("")
+
+    const [responseData,setResponseData] = useState({})
 
     const [passwordFlag,setPasswordFlag] = useState(false)
     const [nameFlag,setNameFlag] = useState(false)
@@ -17,22 +27,28 @@ const SignUp = ()=>{
         if(name.length<=5){
             setNameFlag(true)
         }
-        if(userData.password !== userData.confPassword){
-            console.log(userData)
+        if(userData.password !== userData.confPassword || password.length <=5){
             setPasswordFlag(true)
             return
         }
-        const api = "http://localhost:8080/user/register"
+        const api = signUpApi
         const response = axios.post(api,userData)
 
         response.then((response)=>{
             console.log(response.data)
+            setResponseData(response.data)
         }).catch((err)=>{
             console.log(err)
         })
 
-        
+        navigate("/user-page")
     }
+
+    useEffect(()=>{
+        console.log("response data from client end"+ responseData)
+        localStorage.setItem("token",responseData.token)
+        localStorage.setItem("refreshToken",responseData.refreshToken)
+    },[responseData])
 
     const nameHandler = (e)=>{
         setName(e.target.value)
@@ -74,7 +90,7 @@ const SignUp = ()=>{
                     placeholder="Enter full name"
                     onChange={nameHandler}
                     value={name}/>
-                {nameFlag && <h2 className={classes.warning}>Name should be more than 5 characters in length</h2>}
+                {nameFlag && <h2 className={classes.warning}>{nameWarning}</h2>}
 
                 <input className={classes.ip} 
                         type="email" 
@@ -93,7 +109,7 @@ const SignUp = ()=>{
                         placeholder="Confirm password"
                         onChange={confPasswordHandler}
                         value={confPassword}/>
-                {passwordFlag && <h2 className={classes.warning}>password and confirm password does not match</h2>}
+                {passwordFlag && <h2 className={classes.warning}>{passwordWarning}</h2>}
 
                 <button className={classes.submit_btn} onClick={submitHandler}>Sign Up</button>
             </form>
