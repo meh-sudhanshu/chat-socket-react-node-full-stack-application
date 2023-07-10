@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
 
-import { useJwt } from "react-jwt";
-
-
 import axios from 'axios'
 
 import classes from './signup.module.css'
@@ -18,12 +15,24 @@ const SignUp = ()=>{
     const [password,setPassword] = useState("")
     const [confPassword,setConfPassword] = useState("")
 
-    const [responseData,setResponseData] = useState({})
+    const [responseData,setResponseData] = useState(null)
 
     const [passwordFlag,setPasswordFlag] = useState(false)
     const [nameFlag,setNameFlag] = useState(false)
 
-    const registerUser = (userData)=>{
+   
+    const postRegister = ()=>{
+        const token = localStorage.getItem("token")
+        const refreshToken = localStorage.getItem("refreshToken")
+        const tokens = {
+            token:token,
+            refreshToken:refreshToken
+        }
+        navigate("/user-page",{state:{tokens}})
+    }
+
+
+    const registerUser = async (userData)=>{
         if(name.length<=5){
             setNameFlag(true)
         }
@@ -32,22 +41,18 @@ const SignUp = ()=>{
             return
         }
         const api = signUpApi
-        const response = axios.post(api,userData)
+        const response = await axios.post(api,userData)
 
-        response.then((response)=>{
-            console.log(response.data)
-            setResponseData(response.data)
-        }).catch((err)=>{
-            console.log(err)
-        })
-
-        navigate("/user-page")
+        console.log(response)
+        setResponseData(response.data)
     }
 
     useEffect(()=>{
-        console.log("response data from client end"+ responseData)
-        localStorage.setItem("token",responseData.token)
-        localStorage.setItem("refreshToken",responseData.refreshToken)
+        if(responseData){
+            localStorage.setItem("token",responseData.token)
+            localStorage.setItem("refreshToken",responseData.refreshToken)
+            postRegister()
+        }
     },[responseData])
 
     const nameHandler = (e)=>{

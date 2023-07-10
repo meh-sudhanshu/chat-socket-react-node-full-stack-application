@@ -1,0 +1,48 @@
+
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    gap: 20px;
+}
+.btn{
+    width: 380px;
+    padding: 10px;
+    margin: 20px;
+    cursor: pointer;
+    border: none;
+    color:#F5F5F5;
+}
+
+.cp{
+    background-color: #EF6262;
+}
+.cp:hover{
+    background-color: transparent;
+    border: 1px solid #EF6262;
+    color: #1e1e1e;
+}
+
+.cr{
+    background-color: #17594A;
+}
+
+.cr:hover{
+    background-color: transparent;
+    border: 1px solid #17594A;
+    color: #1e1e1e;
+}  

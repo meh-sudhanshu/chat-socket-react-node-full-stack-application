@@ -1,7 +1,11 @@
 import { getUserByEmail } from "../Database/userDb.js"
 import { saveUser } from "../Database/userDb.js"
 
+import nodemailer from 'nodemailer'
+
 import dotenv from 'dotenv'
+
+
 
 import bcrypt from 'bcrypt'
 import jsonwebtoken from 'jsonwebtoken'
@@ -43,4 +47,28 @@ export const registerUser = (user)=>{
         statusCode:"OK"
     }
 
+}
+
+
+export const registerComplaint = (data)=>{
+    const transporter = nodemailer.createTransport({
+        service:"gmail",
+        auth:{
+            user:"skumar881675@gmail.com",
+            pass:"jlzozugwiozlcfui"
+        }
+    })
+    const mailOptions = {
+        from:"skumar881675@gmail.com",
+        to:"skumar881675@gmail.com",
+        text:data.value,
+        subject:"Your complaint has been registered"
+    }
+    transporter.sendMail(mailOptions,(err,info)=>{
+        if(err){
+            console.log(err)
+        }else{
+            console.log(info)
+        }
+    })
 }

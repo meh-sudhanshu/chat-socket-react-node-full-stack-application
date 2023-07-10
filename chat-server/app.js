@@ -16,10 +16,11 @@ app.use(cors(corsOptions))
 
 app.use("/user",userRoutes)
 
-app.listen(8080,(err)=>{
+const server = app.listen(8080,(err)=>{
     if(err){
         console.log("Something went wrong")
     }else{
         console.log("server is up an running on port 8080")
     }
 })
+

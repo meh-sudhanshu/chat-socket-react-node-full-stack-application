@@ -2,6 +2,8 @@ import express from 'express'
 
 import { registerUser } from '../Controllers/userController.js'
 
+import { registerComplaint } from '../Controllers/userController.js'
+
 
 const userRoutes = express.Router()
 
@@ -18,5 +20,9 @@ userRoutes.post("/register",(req,res)=>{
 
 })
 
+userRoutes.post("/register-complaint",(req,res)=>{
+    const data = req.body
+    registerComplaint(data)
+})
 
 export default userRoutes
