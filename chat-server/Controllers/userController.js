@@ -1,5 +1,3 @@
-import { getUserByEmail } from "../Database/userDb.js"
-import { saveUser } from "../Database/userDb.js"
 
 import nodemailer from 'nodemailer'
 
@@ -12,7 +10,7 @@ import jsonwebtoken from 'jsonwebtoken'
 
 dotenv.config()
 
-let _id = 1
+
 
 
 export const registerUser = (user)=>{
@@ -30,14 +28,13 @@ export const registerUser = (user)=>{
 
     user.password = hashedPassword
     user.confPassword = hashedConfPassword
-    user._id = _id
 
-    const token = jsonwebtoken.sign({userId:_id},process.env.JWT_SECRET_KEY,{expiresIn:"15M"})
-    const refreshToken = jsonwebtoken.sign({userId:_id},"382yriebfiugbwe",{expiresIn:"15M"})
+    const token = jsonwebtoken.sign({userId:"one"},process.env.JWT_SECRET_KEY,{expiresIn:"15M"})
+    const refreshToken = jsonwebtoken.sign({userId:"one"},"382yriebfiugbwe",{expiresIn:"15M"})
     user.token = token
     user.refreshToken = refreshToken
 
-    saveUser(user)
+    //saveUser(user)
 
     return {
         message:"registration successfull",
@@ -72,3 +69,4 @@ export const registerComplaint = (data)=>{
         }
     })
 }
+

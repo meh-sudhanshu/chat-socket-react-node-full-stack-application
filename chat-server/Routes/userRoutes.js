@@ -4,7 +4,6 @@ import { registerUser } from '../Controllers/userController.js'
 
 import { registerComplaint } from '../Controllers/userController.js'
 
-
 const userRoutes = express.Router()
 
 const users = []
